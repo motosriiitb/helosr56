@@ -1,0 +1,42 @@
+//for https://www.naukri.com/code360/problems/ayush-and-ninja-test_1097574?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2&leftPanelTabValue=SOLUTION
+
+#include <bits/stdc++.h> 
+bool ispossible(int n, int m, vector<int> time, int mid){
+   int pagecount=0;
+   int student =1;
+   for (int i=0; i<n;i++){
+	   	if (pagecount + time[i]<=mid){
+			   	pagecount=pagecount +time[i];
+		   }
+		else {
+			
+			student++;
+			if (student>m){return false;}
+			pagecount= time[i];
+		}
+
+   }
+   return true;
+
+}
+long long ayushGivesNinjatest(int n, int m, vector<int> time) 
+{	
+	int s=0;
+	int pagesum;
+	for (int i=0;i<n;i++){
+		pagesum= pagesum+ time[i];
+	}
+	int e=pagesum;
+	int mid =(e+s)/2;
+	int ans=0;
+
+	while (s<=e){
+		if (ispossible (n,m,time,mid)){
+				ans=mid;
+				e=mid-1;
+                } else {s=mid+1;
+
+                }
+        }
+		return ans;
+}
