@@ -1,0 +1,39 @@
+https://www.naukri.com/code360/problems/aggressive-cows_1082559?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2&leftPanelTabValue=SUBMISSION
+
+bool ispossible (vector<int> &stalls, int k,int mid)
+{
+int cowct=1;
+int f=stalls[0];
+
+for (int i=1;i<stalls.size();i++){
+    if (mid<= stalls[i]-f){
+        f=stalls[i];
+        cowct++;
+        if (cowct == k) {
+          return true;
+        }
+    }
+}
+return false;
+}
+
+int aggressiveCows(vector<int> &stalls, int k)
+{
+   sort (stalls.begin(), stalls.end());
+   int s=0;
+   int size = stalls.size();
+   int e=stalls[size -1];
+   
+    int ans=-1;
+int mid=(s+e)/2;
+    while (s<=e){
+      if (ispossible ( stalls, k, mid) ){
+        ans = mid;
+        s = mid + 1;
+      }
+      else {e=mid-1;}
+      mid=(s+e)/2;
+    }
+    return ans;
+
+}
