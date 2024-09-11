@@ -1,0 +1,46 @@
+https://www.naukri.com/code360/problems/painter's-partition-problem_1089557?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2
+
+bool ispossible(int n, int painters, vector<int> boards, int mid){
+ int boardct=0;
+ int ptr=1;
+
+ for (int i=0;i<n;i++){
+     if (boards[i]+boardct<=mid){
+         boardct=boardct+boards[i];
+     }
+     else{
+         ptr++;
+         boardct=boards[i];
+         if (ptr>painters){return false;}
+     }
+     return true;
+ }
+
+}
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    
+    int s=0;
+   int total=0;
+   int n= boards.size();
+   for (int i=0;i<n;i++){
+       total=total+ boards[i];
+   }
+  
+int mid=total/2;
+int ans;
+
+while (s<=total){
+       if (ispossible(n, k, boards, mid)) {
+    ans =mid;
+         total = mid -1;
+       }
+      if (ispossible(n, k, boards, mid)==0) {
+         s = mid + 1;
+       }
+       mid=(s+total)/2;
+    }
+     
+ return ans;
+
+}
